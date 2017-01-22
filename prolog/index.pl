@@ -20,3 +20,10 @@ choque_turma(turma(X, Y), turma(X, Y)).
 choque_turma(turma(X, Y), turma(A, B)) :-
   aulas(turma(X, Y), L), aulas(turma(A, B), M),
   choque_aulas(L, M).
+
+%% Verificação de alocação inválida
+alocacao_invalida([H|T]) :- member(H, T); alocacao_invalida(T).
+alocacao_invalida([turma(X, A)|[turma(Y, B)|_]]) :-
+  prereq_transitivo(X, Y);
+  choque_turma(turma(X, A), turma(Y, B));
+  X = Y.
