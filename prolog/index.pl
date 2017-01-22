@@ -33,3 +33,12 @@ carga_horaria_horarios([], 0).
 carga_horaria_horarios([horario(_, I, F)|T], N) :-
   carga_horaria_horarios(T, A),
   N is (F - I) + A.
+
+carga_horaria_turmas([], 0).
+carga_horaria_turmas([turma(A,B) | T], N) :-
+    c_h_turma(turma(A, B), N),
+    carga_horaria_turmas(T, _).
+
+c_h_turma(turma(A,B), N) :-
+    aulas(turma(A, B), C),
+    carga_horaria_horarios(C, N).
