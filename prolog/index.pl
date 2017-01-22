@@ -27,3 +27,9 @@ alocacao_invalida([turma(X, A)|[turma(Y, B)|_]]) :-
   prereq_transitivo(X, Y);
   choque_turma(turma(X, A), turma(Y, B));
   X = Y.
+
+%%
+carga_horaria_horarios([], 0).
+carga_horaria_horarios([horario(_, I, F)|T], N) :-
+  carga_horaria_horarios(T, A),
+  N is (F - I) + A.
